@@ -1,8 +1,13 @@
+import java.util.ArrayList;
 import java.util.List;
 
-public class SmokeAlarmImpl implements Subject, SmokeAlarm {
+public class SmokeAlarmClass implements Subject, SmokeAlarm {
     private List<Observer> observers;
     private SmokeAlarmState state;
+
+    public SmokeAlarmClass(){
+        observers= new ArrayList<Observer>();
+    }
     public void registerObserver(Observer o) {
         this.observers.add(o);
     }
@@ -19,6 +24,8 @@ public class SmokeAlarmImpl implements Subject, SmokeAlarm {
     }
 
     public void notifyObservers() {
-       // observers.forEach(observer -> observer.update());
+       for(Observer o: observers){
+           o.update();
+       }
     }
 }
