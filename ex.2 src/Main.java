@@ -1,7 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        SmokeAlarm smokeAlarm = new SmokeAlarmImpl();
-        EmailNotifier emailNotifier = new EmailNotifier();
-        smokeAlarm.subscribe(new EmailNotifier());
+        SmokeAlarm smokeAlarm = new SmokeAlarmClass();
+        Display temperatureDisplay = new DisplayClass(smokeAlarm);
+        WaterDispenserClass wd= new WaterDispenserClass(smokeAlarm);
+
+        smokeAlarm.setChanges(7,50);
+
     }
 }

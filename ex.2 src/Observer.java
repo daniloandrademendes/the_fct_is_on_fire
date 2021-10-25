@@ -1,3 +1,6 @@
 public interface Observer {
-    void update();
+
+    void update(int smokeIntensity,float temperature);
+
+
 }
