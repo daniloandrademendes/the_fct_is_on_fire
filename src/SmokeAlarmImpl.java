@@ -3,8 +3,12 @@ import java.util.List;
 public class SmokeAlarmImpl implements Subject, SmokeAlarm {
     private List<Observer> observers;
     private SmokeAlarmState state;
-    public void subscribe(Observer observer) {
+    public void registerObserver(Observer observer) {
         this.observers.add(observer);
+    }
+
+    public void unregisterObserver(Observer observer) {
+        observers.remove(observer);
     }
 
     public void onSmokeIsPresent() {

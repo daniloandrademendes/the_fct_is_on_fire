@@ -1,3 +1,4 @@
 public interface Subject {
-    void subscribe(Observer observer);
+    void registerObserver(Observer observer);
+    void unregisterObserver(Observer observer);
 }
