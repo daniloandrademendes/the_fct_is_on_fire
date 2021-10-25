@@ -1,4 +1,4 @@
 public interface SmokeAlarm extends Subject {
-    void onSmokeIsPresent();
-    void onStopAlarmButtonIsPressed();
+
+    void setChanges(int smokeIntesity, float temperature);
 }
