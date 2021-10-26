@@ -3,17 +3,13 @@ import java.util.List;
 
 public class SmokeAlarmClass implements Subject, SmokeAlarm {
     private List<Observer> observers;
-    private boolean alarmOn;
+
     private int smokeIntesity;
     private float temperature;
 
 
-
-
-
     public SmokeAlarmClass(){
         observers= new ArrayList<Observer>();
-        alarmOn=false;
     }
     public void registerObserver(Observer o) {
         this.observers.add(o);
@@ -24,8 +20,7 @@ public class SmokeAlarmClass implements Subject, SmokeAlarm {
     }
 
 
-
-    public  void changesMade(){
+    public void changesMade(){
         notifyObservers();
     }
 @Override
@@ -33,8 +28,6 @@ public class SmokeAlarmClass implements Subject, SmokeAlarm {
         this.smokeIntesity=smokeIntesity;
         this.temperature=temperature;
         changesMade();
-
-
 
     }
     public void notifyObservers() {

@@ -4,7 +4,6 @@ public class DisplayClass implements Observer,Display {
 
     public DisplayClass(Subject smokeAlarm){
         this.smokeAlarm=smokeAlarm;
-        this.smokeAlarm.registerObserver(this);
     }
 
 
