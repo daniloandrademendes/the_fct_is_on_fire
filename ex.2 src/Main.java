@@ -2,10 +2,8 @@ public class Main {
     public static void main(String[] args) {
         SmokeAlarmSubject smokeAlarmSubject = new SmokeAlarmSubjectClass();
         SmokeAlarm smokeAlarm = new SmokeAlarmClass(smokeAlarmSubject);
-        WaterDispenser wd = new WaterDispenser();
-        smokeAlarmSubject.registerObserver(wd);
-        Observer temperatureDisplay = new DisplayClass();
-        smokeAlarmSubject.registerObserver(temperatureDisplay);
+        WaterDispenser wd = new WaterDispenser(smokeAlarmSubject);
+        Observer temperatureDisplay = new DisplayClass(smokeAlarmSubject);
 
         System.out.println("** Water Dispenser State **");
         System.out.println(wd.getStateWaterDispenser().toString());

@@ -1,7 +1,13 @@
+
+
 public class WaterDispenser implements Observer {
 
-    private WaterDispenserState state = new WaterDispenserStopped(this);
+    private WaterDispenserState state;
 
+    public WaterDispenser(SmokeAlarmSubject subject) {
+        subject.registerObserver(this);
+        state = new WaterDispenserStopped(this);
+    }
 
     @Override
     public void update(int smokeIntensity, float temperature) {
