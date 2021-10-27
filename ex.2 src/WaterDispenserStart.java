@@ -8,7 +8,7 @@ public class WaterDispenserStart extends WaterDispenser implements WaterDispense
 
     @Override
     public void turnWater(WaterDispenser state) {
-        System.out.println("The water dispenser was started, water is falling");
+        System.out.println("The water dispenser has started, water is falling");
         state.setStateWaterDispenser(this);
     }
     public String toString(){

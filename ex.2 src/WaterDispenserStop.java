@@ -8,7 +8,7 @@ public class WaterDispenserStop extends WaterDispenser implements WaterDispenser
     }
 
     public void turnWater(WaterDispenser state) {
-        System.out.println("The water dispenser was stopped, no water is falling");
+        System.out.println("The water dispenser has stopped, no water is falling");
         state.setStateWaterDispenser(this);
     }
 
