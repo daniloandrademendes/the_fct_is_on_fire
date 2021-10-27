@@ -1,18 +1,12 @@
-public class DisplayClass implements Observer,Display {
-    private Subject smokeAlarm;
+public class DisplayClass implements Observer, Display {
     private float temperature;
 
-    public DisplayClass(Subject smokeAlarm){
-        this.smokeAlarm=smokeAlarm;
-    }
-
-
     @Override
-    public void update(int smokeIntensity,float temperature) {
-        this.temperature=temperature;
+    public void update(int smokeIntensity, float temperature) {
+        this.temperature = temperature;
     }
     @Override
     public void display(){
-        System.out.println("the current temperature is: "+temperature+" degrees");
+        System.out.println("the current temperature is: " + temperature + " degrees");
     }
 }

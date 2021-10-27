@@ -1,37 +1,27 @@
-public abstract class WaterDispenser implements Observer, WaterDispenserState {
+public class WaterDispenser implements Observer {
 
-    private Subject smokeAlarm;
-    private WaterDispenser state;
-    private int smokeIntensity;
-
-
-    public WaterDispenser(Subject smokeAlarm){
-        this.smokeAlarm=smokeAlarm;
-    }
+    private WaterDispenserState state = new WaterDispenserStopped(this);
 
 
     @Override
-    public void update(int smokeIntensity,float temperature) {
-        this.smokeIntensity=smokeIntensity;
-        if(smokeIntensity>=7) {
-            WaterDispenserStart startToFall = new WaterDispenserStart(smokeAlarm);
-            startToFall.turnWater(state);
-        }
-
-        else if(state instanceof WaterDispenserStart && smokeIntensity<7){
-            WaterDispenserStop stopToFall = new WaterDispenserStop(smokeAlarm);
-            stopToFall.turnWater(state);
-        }
-        setStateWaterDispenser(getStateWaterDispenser());
+    public void update(int smokeIntensity, float temperature) {
+        this.state.update(smokeIntensity, temperature);
     }
 
-    public void setStateWaterDispenser(WaterDispenser state) {
-        this.state = state;
+    public void dispenseWater() {
+        System.out.println("The water started to fall!");
+        this.setStateWaterDispenser(new WaterDispenserStarted(this));
     }
 
-    public WaterDispenser getStateWaterDispenser() {
+    public void stopDispenseWater() {
+        System.out.println("The water stopped to fall!");
+        this.setStateWaterDispenser(new WaterDispenserStopped(this));
+    }
+
+    public WaterDispenserState getStateWaterDispenser() {
         return state;
     }
-
-    public abstract void turnWater(WaterDispenser state);
+    private void setStateWaterDispenser(WaterDispenserState state) {
+        this.state = state;
+    }
 }

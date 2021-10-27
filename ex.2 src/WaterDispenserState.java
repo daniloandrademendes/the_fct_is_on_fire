@@ -1,5 +1,5 @@
 public interface WaterDispenserState {
 
-    void turnWater(WaterDispenser state);
+    void update(int intensity, float temperature);
 
 }

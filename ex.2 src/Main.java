@@ -1,8 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        SmokeAlarm smokeAlarm = new SmokeAlarmClass();
-        WaterDispenser wd= new WaterDispenserStop(smokeAlarm);
-        Display temperatureDisplay = new DisplayClass(smokeAlarm);
+        SmokeAlarmSubject smokeAlarmSubject = new SmokeAlarmSubjectClass();
+        SmokeAlarm smokeAlarm = new SmokeAlarmClass(smokeAlarmSubject);
+        WaterDispenser wd = new WaterDispenser();
+        smokeAlarmSubject.registerObserver(wd);
+        Observer temperatureDisplay = new DisplayClass();
+        smokeAlarmSubject.registerObserver(temperatureDisplay);
 
         System.out.println("** Water Dispenser State **");
         System.out.println(wd.getStateWaterDispenser().toString());
@@ -24,6 +27,24 @@ public class Main {
         System.out.println("***************************");
 
         smokeAlarm.setChanges(7,23);//water dispenser should turn on
+        System.out.println();
+        System.out.println("** Water Dispenser State **");
+        System.out.println(wd.getStateWaterDispenser().toString());
+        System.out.println("***************************");
+
+        smokeAlarm.setChanges(6,23);//water dispenser should keep on
+        System.out.println();
+        System.out.println("** Water Dispenser State **");
+        System.out.println(wd.getStateWaterDispenser().toString());
+        System.out.println("***************************");
+
+        smokeAlarm.setChanges(2,23);//water dispenser should turn off
+        System.out.println();
+        System.out.println("** Water Dispenser State **");
+        System.out.println(wd.getStateWaterDispenser().toString());
+        System.out.println("***************************");
+
+        smokeAlarm.setChanges(2,80);//water dispenser should turn on
         System.out.println();
         System.out.println("** Water Dispenser State **");
         System.out.println(wd.getStateWaterDispenser().toString());

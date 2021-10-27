@@ -1,4 +1,3 @@
-public interface SmokeAlarm extends Subject{
-
+public interface SmokeAlarm {
     void setChanges(int smokeIntesity, float temperature);
 }
