@@ -1,13 +1,13 @@
 package Lab5.src;
 
+import Lab5.src.cBook.Contact;
+import Lab5.src.cBook.ContactBook;
+import Lab5.src.cBook.ContactBookInList;
+import Lab5.src.exceptions.ContactDoesNotExistException;
+import Lab5.src.exceptions.ContactAlreadyExistsException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import cBook.Contact;
-import cBook.ContactBook;
-import cBook.ContactBookInList;
-import Lab5.src.exceptions.ContactAlreadyExistsException;
-import Lab5.src.exceptions.ContactDoesNotExistException;
 
 /**
  * Main program for the application ContactBook.

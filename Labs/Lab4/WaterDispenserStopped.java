@@ -1,3 +1,5 @@
+package Lab4;
+
 public class WaterDispenserStopped implements WaterDispenserState {
     private WaterDispenser waterDispenser;
 

@@ -79,7 +79,7 @@ public class RunAllTests {
         try {
             Locale.setDefault(Locale.US);
             System.setIn(new FileInputStream(input));
-            Class<?> mainClass = Class.forName("Main");
+            Class<?> mainClass = Class.forName("Lab4.Main");
             mainClass.getMethod("main", String[].class).invoke(null, new Object[] { new String[0] });
         } catch (Exception e) {
             e.printStackTrace();

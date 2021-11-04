@@ -1,3 +1,5 @@
+package Lab4;
+
 public class DisplayClass implements Observer, Display {
     private float temperature;
 

@@ -1,3 +1,5 @@
+package Lab4;
+
 public class SmokeAlarmClass implements SmokeAlarm {
     private int smokeIntensity;
     private float temperature;

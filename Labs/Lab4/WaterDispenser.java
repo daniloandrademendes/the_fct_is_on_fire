@@ -1,4 +1,4 @@
-
+package Lab4;
 
 public class WaterDispenser implements Observer {
 
