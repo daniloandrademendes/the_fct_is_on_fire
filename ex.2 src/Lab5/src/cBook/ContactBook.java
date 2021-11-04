@@ -1,8 +1,8 @@
-package cBook;
+package Lab5.src.cBook;
 
 import java.util.Iterator;
-import exceptions.ContactAlreadyExistsException;
-import exceptions.ContactDoesNotExistException;
+import Lab5.src.exceptions.ContactAlreadyExistsException;
+import Lab5.src.exceptions.ContactDoesNotExistException;
 
 public interface ContactBook {
 

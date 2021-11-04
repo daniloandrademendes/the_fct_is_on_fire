@@ -1,4 +1,4 @@
-package cBook;
+package Lab5.src.cBook;
 
 /**
  * By removing the public visibility, this class is no longer visible outside the package

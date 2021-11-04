@@ -1,10 +1,10 @@
-package cBook;
+package Lab5.src.cBook;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Iterator;
-import exceptions.ContactAlreadyExistsException;
-import exceptions.ContactDoesNotExistException;
+import Lab5.src.exceptions.ContactAlreadyExistsException;
+import Lab5.src.exceptions.ContactDoesNotExistException;
 
 public class ContactBookInList implements ContactBook {
     /**
@@ -16,7 +16,7 @@ public class ContactBookInList implements ContactBook {
      * Default constructor
      */
     public ContactBookInList() {
-        contacts = new LinkedList<Contact>();
+        contacts = new LinkedList<>();
     }
 
     @Override
@@ -39,13 +39,6 @@ public class ContactBookInList implements ContactBook {
 
     @Override
     public void deleteContact(String name) throws ContactDoesNotExistException {
-        // A possible alternative would be:
-        // Contact c = this.getContact(name);
-        // contacts.remove(c);
-        // but this requires two searches in the list.
-        // The following solution requires an equals(Object o) method
-        // implemented in the ContactClass and a constructor that receives the name
-        // as its single argument.
         if (has_Contact(name))
             contacts.remove(new ContactClass(name));
         else
@@ -53,34 +46,50 @@ public class ContactBookInList implements ContactBook {
     }
 
     @Override
-    public int getPhone(String name) throws ContactDoesNotExistException {
-        if (has_Contact(name))
-            return this.getContact(name).getPhone();
-        else
+    public int getPhone(String name) throws ContactDoesNotExistException, NullPointerException {
+        if (has_Contact(name)) {
+            Contact contact = this.getContact(name);
+            if(contact == null) {
+                throw new NullPointerException();
+            }else
+                return contact.getPhone();
+        } else
             throw new ContactDoesNotExistException();
     }
 
     @Override
-    public String getEmail(String name) throws ContactDoesNotExistException {
-        if (has_Contact(name))
-            return this.getContact(name).getEmail();
-        else
+    public String getEmail(String name) throws ContactDoesNotExistException, NullPointerException {
+        if (has_Contact(name)) {
+            Contact contact = this.getContact(name);
+            if (contact == null) {
+                throw new NullPointerException();
+            } else
+                return contact.getEmail();
+        }else
             throw new ContactDoesNotExistException();
     }
 
     @Override
-    public void setPhone(String name, int phone) throws ContactDoesNotExistException {
-        if (has_Contact(name))
-            this.getContact(name).setPhone(phone);
-        else
+    public void setPhone(String name, int phone) throws ContactDoesNotExistException,NullPointerException {
+        if (has_Contact(name)) {
+            Contact contact = this.getContact(name);
+            if (contact == null) {
+                throw new NullPointerException();
+            } else
+                contact.setPhone(phone);
+        }else
             throw new ContactDoesNotExistException();
     }
 
     @Override
-    public void setEmail(String name, String email) throws ContactDoesNotExistException {
-        if (has_Contact(name))
-            this.getContact(name).setEmail(email);
-        else
+    public void setEmail(String name, String email) throws ContactDoesNotExistException, NullPointerException {
+        if (has_Contact(name)) {
+            Contact contact = this.getContact(name);
+            if (contact == null) {
+                throw new NullPointerException();
+            } else
+                contact.setEmail(email);
+        }else
             throw new ContactDoesNotExistException();
     }
 

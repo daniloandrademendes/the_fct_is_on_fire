@@ -1,4 +1,4 @@
-package cBook;
+package Lab5.src.cBook;
 
 public interface Contact {
     /**
