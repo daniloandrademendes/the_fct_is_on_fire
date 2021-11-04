@@ -1,38 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class SmokeAlarmClass implements Subject, SmokeAlarm {
-    private List<Observer> observers;
-
-    private int smokeIntesity;
+public class SmokeAlarmClass implements SmokeAlarm {
+    private int smokeIntensity;
     private float temperature;
+    private final SmokeAlarmSubject subject;
 
-
-    public SmokeAlarmClass(){
-        observers= new ArrayList<Observer>();
-    }
-    public void registerObserver(Observer o) {
-        this.observers.add(o);
-    }
-
-    public void unregisterObserver(Observer o) {
-        observers.remove(o);
+    public SmokeAlarmClass(SmokeAlarmSubject subject) {
+        this.subject = subject;
     }
 
 
-    public void changesMade(){
-        notifyObservers();
-    }
-@Override
+    @Override
     public void setChanges(int smokeIntesity, float temperature) {
-        this.smokeIntesity=smokeIntesity;
-        this.temperature=temperature;
-        changesMade();
-
-    }
-    public void notifyObservers() {
-       for(Observer o: observers){
-           o.update(smokeIntesity,temperature);
-       }
+        this.smokeIntensity = smokeIntesity;
+        this.temperature = temperature;
+        this.subject.notifyObservers(smokeIntensity, temperature);
     }
 }
