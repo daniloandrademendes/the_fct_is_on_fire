@@ -1,13 +1,11 @@
 package Lab5.src;
 
-import Lab5.src.cBook.Contact;
-import Lab5.src.cBook.ContactBook;
-import Lab5.src.cBook.ContactBookInList;
-import Lab5.src.exceptions.ContactDoesNotExistException;
-import Lab5.src.exceptions.ContactAlreadyExistsException;
+import Lab5.src.cBook.*;
+import Lab5.src.exceptions.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Iterator;
 
 /**
  * Main program for the application ContactBook.
@@ -16,7 +14,6 @@ public class Main {
     private static final String NOT_A_VALID_PHONE_NUMBER = "Not a valid phone number.";
 
     // Constants for defining the user feedback
-    public static final String CONTACT_EXISTS = "Contact already exists.";
     public static final String NAME_NOT_EXIST = "Contact does not exist.";
     public static final String CONTACT_ADDED = "Contact added.";
     public static final String CONTACT_REMOVED = "Contact removed.";
@@ -33,21 +30,20 @@ public class Main {
 
         private final String commandInputName;
 
-        private Command(String commandInputName) {
+        Command(String commandInputName) {
             this.commandInputName = commandInputName;
         }
 
         public String getCommandInputName() {
             return commandInputName;
         }
-    };
+    }
 
     /**
      * Main program. Runs the command interpreter.
      * @param args - arguments for executing the program. Not used in this program.
      */
-    public static void main(String[] args) {
-        Main.execute_commands();
+    public static void main(String[] args) {execute_commands();
     }
 
     /**
@@ -81,6 +77,7 @@ public class Main {
                     listAllContacts(cBook);
                     break;
                 default:
+                    System.out.println(ERROR);
             }
             System.out.println();
             comm = readCommand(in);
@@ -109,13 +106,13 @@ public class Main {
      * @param cBook ContactBook in which we want to add a new contact
      */
     private static void addContact(Scanner in, ContactBook cBook) {
+        String name = in.nextLine();
         try {
-            String name = in.nextLine();
             int phone = in.nextInt();
             in.nextLine();
             String email = in.nextLine();
             cBook.addContact(name, phone, email);
-            System.out.println(Main.CONTACT_ADDED);
+            System.out.println(CONTACT_ADDED);
         } catch (InputMismatchException e) {
             System.out.println(NOT_A_VALID_PHONE_NUMBER);
             in.nextLine();
@@ -131,13 +128,12 @@ public class Main {
      * @param cBook ContactBook in which one wants to remove the contact.
      */
     private static void deleteContact(Scanner in, ContactBook cBook) {
-        String name;
-        name = in.nextLine();
+        String name = in.nextLine();
         try {
             cBook.deleteContact(name);
-            System.out.println(Main.CONTACT_REMOVED);
+            System.out.println(CONTACT_REMOVED);
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(NAME_NOT_EXIST);
         }
     }
 
@@ -147,12 +143,11 @@ public class Main {
      * @param cBook ContactBook from which we want to fetch the phone number.
      */
     private static void getPhone(Scanner in, ContactBook cBook) {
-        String name;
-        name = in.nextLine();
+        String name = in.nextLine();
         try {
             System.out.println(cBook.getPhone(name));
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(NAME_NOT_EXIST);
         }
     }
 
@@ -162,12 +157,11 @@ public class Main {
      * @param cBook ContactBook from which we want to fetch the email address.
      */
     private static void getEmail(Scanner in, ContactBook cBook) {
-        String name;
-        name = in.nextLine();
+        String name = in.nextLine();
         try {
             System.out.println(cBook.getEmail(name));
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(NAME_NOT_EXIST);
         }
     }
 
@@ -177,24 +171,18 @@ public class Main {
      * @param cBook ContactBook where we want to update the phone number.
      */
     private static void setPhone(Scanner in, ContactBook cBook) {
-        try {
-            String name;
-            int phone;
-            name = in.nextLine();
-            try {
-                phone = in.nextInt();
-                in.nextLine();
-                cBook.setPhone(name, phone);
-                System.out.println(Main.CONTACT_UPDATED);
-            } catch (InputMismatchException e) {
-                in.nextLine();
-                System.out.println(Main.NOT_A_VALID_PHONE_NUMBER);
-            } catch (ContactDoesNotExistException e) {
-                System.out.println(Main.NAME_NOT_EXIST);
-            }
-        } catch (InputMismatchException e) {
-            System.out.println(e.getMessage());
-        }
+         String name= in.nextLine();
+         try {
+             int phone = in.nextInt();
+             in.nextLine();
+             cBook.setPhone(name, phone);
+             System.out.println(CONTACT_UPDATED);
+         } catch (InputMismatchException e) {
+             in.nextLine();
+             System.out.println(NOT_A_VALID_PHONE_NUMBER);
+         } catch (ContactDoesNotExistException e) {
+             System.out.println(NAME_NOT_EXIST);
+         }
     }
 
     /**
@@ -209,9 +197,9 @@ public class Main {
         email = in.nextLine();
         try {
             cBook.setEmail(name,email);
-            System.out.println(Main.CONTACT_UPDATED);
+            System.out.println(CONTACT_UPDATED);
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(NAME_NOT_EXIST);
         }
     }
 
@@ -221,10 +209,10 @@ public class Main {
      */
     private static void listAllContacts(ContactBook cBook) {
         if (cBook.getNumberOfContacts() != 0) {
-            java.util.Iterator<Contact> it = cBook.listContacts();
+            Iterator<Contact> it = cBook.listContacts();
             while(it.hasNext())
                 System.out.println(it.next());
         }
-        else System.out.println(Main.BOOK_EMPTY);
+        else System.out.println(BOOK_EMPTY);
     }
 }
