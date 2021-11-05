@@ -3,11 +3,11 @@ package Lab5.src.cBook;
 /**
  * By removing the public visibility, this class is no longer visible outside the package
  */
-class ContactClass implements Contact {
+class ContactClass implements MutableContact {
     /**
      * Contact name.
      */
-    private String name;
+    private final String name;
 
     /**
      * Contact phone number.
@@ -66,19 +66,15 @@ class ContactClass implements Contact {
 
         if (obj == null) return false;
 
-        if (!(obj instanceof Contact)) return false;
+        if (!(obj instanceof MutableContact)) return false;
 
-        Contact other = (Contact) obj;
+        MutableContact other = (MutableContact) obj;
 
         if (name == null) {
             return  other.getName() != null;
         }
-        else
+        else {
             return name.equals(other.getName());
-    }
-
-    @Override
-    public String toString() {
-        return getName() + "; " + email + "; " + getPhone();
+        }
     }
 }

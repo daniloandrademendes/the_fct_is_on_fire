@@ -45,7 +45,7 @@ public class RunAllTests {
      */
     @Test public void test02() { test("2_in_test.txt","2_out_test.txt"); }
 
-    private static final File BASE = new File("tests");
+    private static final File BASE = new File("Labs/Lab5/tests");
 
     private PrintStream consoleStream;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -82,7 +82,7 @@ public class RunAllTests {
         try {
             Locale.setDefault(Locale.US);
             System.setIn(new FileInputStream(input));
-            Class<?> mainClass = Class.forName("Lab4.Main");
+            Class<?> mainClass = Class.forName("Lab5.src.Main");
             mainClass.getMethod("main", String[].class).invoke(null, new Object[] { new String[0] });
         } catch (Exception e) {
             e.printStackTrace();

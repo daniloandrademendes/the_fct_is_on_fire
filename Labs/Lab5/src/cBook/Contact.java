@@ -19,15 +19,4 @@ public interface Contact {
      */
     String getEmail();
 
-    /**
-     * Changes the phone number of this contact
-     * @param phone the phone number
-     */
-    void setPhone(int phone);
-
-    /**
-     * Updates the contact email
-     * @param email new email address
-     */
-    void setEmail(String email);
 }
