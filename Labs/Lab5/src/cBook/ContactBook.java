@@ -1,8 +1,8 @@
 package Lab5.src.cBook;
 
+import Lab5.src.exceptions.*;
+
 import java.util.Iterator;
-import Lab5.src.exceptions.ContactAlreadyExistsException;
-import Lab5.src.exceptions.ContactDoesNotExistException;
 
 public interface ContactBook {
 
@@ -18,7 +18,7 @@ public interface ContactBook {
      * Returns the number of existing contacts
      * @return the number of existing contacts
      */
-    public int getNumberOfContacts();
+    int getNumberOfContacts();
 
     /**
      * Adds a new contact to the contact book
