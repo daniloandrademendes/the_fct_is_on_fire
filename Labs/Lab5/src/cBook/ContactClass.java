@@ -30,7 +30,6 @@ class ContactClass implements Contact {
 
     /**
      * Constructor with just the name. Leaves the phone number at 0, and the email address to null.
-     * @param name
      */
     public ContactClass(String name) {
         this(name, 0, null);
@@ -72,10 +71,10 @@ class ContactClass implements Contact {
         Contact other = (Contact) obj;
 
         if (name == null) {
-            if (other.getName() != null) return false;
-            else return true;
+            return  other.getName() != null;
         }
-        else return name.equals(other.getName());
+        else
+            return name.equals(other.getName());
     }
 
     @Override
