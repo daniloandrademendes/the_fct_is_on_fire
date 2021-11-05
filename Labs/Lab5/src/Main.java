@@ -145,7 +145,7 @@ public class Main {
     private static void getPhone(Scanner in, ContactBook cBook) {
         String name = in.nextLine();
         try {
-            System.out.println(cBook.getPhone(name));
+            System.out.println(cBook.getContact(name).getPhone());
         } catch (ContactDoesNotExistException e) {
             System.out.println(NAME_NOT_EXIST);
         }
@@ -159,7 +159,7 @@ public class Main {
     private static void getEmail(Scanner in, ContactBook cBook) {
         String name = in.nextLine();
         try {
-            System.out.println(cBook.getEmail(name));
+            System.out.println(cBook.getContact(name).getEmail());
         } catch (ContactDoesNotExistException e) {
             System.out.println(NAME_NOT_EXIST);
         }
@@ -210,8 +210,10 @@ public class Main {
     private static void listAllContacts(ContactBook cBook) {
         if (cBook.getNumberOfContacts() != 0) {
             Iterator<Contact> it = cBook.listContacts();
-            while(it.hasNext())
-                System.out.println(it.next());
+            while(it.hasNext()) {
+                Contact next = it.next();
+                System.out.println(next.getName() + "; " + next.getEmail() + "; " + next.getPhone());
+            }
         }
         else System.out.println(BOOK_EMPTY);
     }

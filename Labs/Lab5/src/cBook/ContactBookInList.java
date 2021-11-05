@@ -11,7 +11,7 @@ public class ContactBookInList implements ContactBook {
     /**
      * A collection of contacts.
      */
-    private List<Contact> contacts;
+    private List<MutableContact> contacts;
 
     /**
      * Default constructor
@@ -21,8 +21,13 @@ public class ContactBookInList implements ContactBook {
     }
 
     @Override
-    public boolean has_Contact(String name) {
-        return this.getContact(name) != null;
+    public boolean hasContact(String name) {
+        try {
+            this.getMutableContact(name);
+            return true;
+        } catch (ContactDoesNotExistException e) {
+            return false;
+        }
     }
 
     @Override
@@ -32,82 +37,50 @@ public class ContactBookInList implements ContactBook {
 
     @Override
     public void addContact(String name, int phone, String email) throws ContactAlreadyExistsException {
-        if (has_Contact(name))
+        if (hasContact(name)) {
             throw new ContactAlreadyExistsException();
-        else
+        } else {
             contacts.add(new ContactClass(name, phone, email));
+        }
     }
 
     @Override
     public void deleteContact(String name) throws ContactDoesNotExistException {
-        if (has_Contact(name))
-            contacts.remove(new ContactClass(name));
-        else
-            throw new ContactDoesNotExistException();
-    }
-
-    @Override
-    public int getPhone(String name) throws ContactDoesNotExistException, NullPointerException {
-        if (has_Contact(name)) {
-            Contact contact = this.getContact(name);
-            if(contact == null) {
-                throw new NullPointerException();
-            }else
-                return contact.getPhone();
-        } else
-            throw new ContactDoesNotExistException();
-    }
-
-    @Override
-    public String getEmail(String name) throws ContactDoesNotExistException, NullPointerException {
-        if (has_Contact(name)) {
-            Contact contact = this.getContact(name);
-            if (contact == null) {
-                throw new NullPointerException();
-            } else
-                return contact.getEmail();
-        }else
-            throw new ContactDoesNotExistException();
+        contacts.remove(getMutableContact(name));
     }
 
     @Override
     public void setPhone(String name, int phone) throws ContactDoesNotExistException,NullPointerException {
-        if (has_Contact(name)) {
-            Contact contact = this.getContact(name);
-            if (contact == null) {
-                throw new NullPointerException();
-            } else
-                contact.setPhone(phone);
-        }else
-            throw new ContactDoesNotExistException();
+        this.getMutableContact(name).setPhone(phone);
     }
 
     @Override
     public void setEmail(String name, String email) throws ContactDoesNotExistException, NullPointerException {
-        if (has_Contact(name)) {
-            Contact contact = this.getContact(name);
-            if (contact == null) {
-                throw new NullPointerException();
-            } else
-                contact.setEmail(email);
-        }else
-            throw new ContactDoesNotExistException();
+        this.getMutableContact(name).setEmail(email);
     }
 
     @Override
     public Iterator<Contact> listContacts() {
+        @SuppressWarnings("unchecked")
+        List<Contact> contacts = (List<Contact>)(List<?>) this.contacts;
         return contacts.iterator();
     }
 
     /**
      * @param name The contact name to lookup in the list
      * @return the <code>name</code> of the contact, if it exists,
-     * otherwise <code>null</code>
+     * otherwise <code>Throws ContactDoesNotExistException</code>
      */
-    private Contact getContact(String name) {
-        for (Contact c: contacts)
-            if (c.getName().equals(name))
+    private MutableContact getMutableContact(String name) throws ContactDoesNotExistException {
+        for (MutableContact c: contacts) {
+            if (c.getName().equals(name)) {
                 return c;
-        return null;
+            }
+        }
+        throw new ContactDoesNotExistException();
+    }
+
+    public Contact getContact(String name) throws ContactDoesNotExistException {
+        return getMutableContact(name);
     }
 }

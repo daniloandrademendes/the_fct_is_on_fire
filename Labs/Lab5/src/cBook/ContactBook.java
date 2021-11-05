@@ -12,7 +12,7 @@ public interface ContactBook {
      * @return <code>true</code> if the contact with <code>name</code> exists,
      * <code>false</code> otherwise
      */
-    boolean has_Contact(String name);
+    boolean hasContact(String name);
 
     /**
      * Returns the number of existing contacts
@@ -35,21 +35,6 @@ public interface ContactBook {
      */
     void deleteContact(String name) throws ContactDoesNotExistException;
 
-    /**
-     * Checks the phone number of a contact given its name
-     * @param name of the contact to get the phone number from
-     * @return the phone number of the contact
-     * @throws ContactDoesNotExistException
-     */
-    int getPhone(String name) throws ContactDoesNotExistException;
-
-    /**
-     * Gets the email address of a contact, given its name
-     * @param name the name of the contact for which we want to get the email address
-     * @return the email address of the associated contact
-     * @throws ContactDoesNotExistException
-     */
-    String getEmail(String name) throws ContactDoesNotExistException;
 
     /**
      * Updates the phone number of this contact
@@ -72,5 +57,11 @@ public interface ContactBook {
      * @return an iterator to all contacts
      */
     Iterator<Contact> listContacts();
+
+    /**
+     * Returns a contact given a name
+     * @return a the contact
+     */
+    Contact getContact(String name) throws ContactDoesNotExistException;
 
 }
